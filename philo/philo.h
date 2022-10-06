@@ -10,7 +10,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void    create_threads(char *av);
+typedef struct t_philosophers
+{
+    int i;
+}   t_philo;
+
+
+void	error(char *s);
+void	check_numbers(char **av);
+void    create_threads(int philo_num);
+
 int     ft_atoi(char *str);
 
 #endif

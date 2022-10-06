@@ -12,14 +12,14 @@
 
 NAME = philo
 
-SRC = philo.c philo_utils.c 
+SRC = philo.c philo_utils.c philo_errors.c
 
 OBJS = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror 
 
 all : $(NAME)
 $(NAME): $(OBJS)
-	cc $(CFLAGS) $(SRC) -o $(NAME)
+	cc  $(SRC) $(CFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
