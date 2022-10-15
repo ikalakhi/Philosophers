@@ -11,23 +11,23 @@
 /* ************************************************************************** */
 #include "philo.h"
 
-void    *hey()
+void    *hey(void)
 {
     void    *i = NULL;
 
-    printf("I am here\n");
+    printf("Philosopher\n");
     return(i);
 }
 
-void    create_threads(int philo_num)
+void    create_threads(t_philo *philo)
 {
-    pthread_t   ph[philo_num];
     int         i;
+    pthread_t   ph[philo->number_of_philos];
 
     i = 0;
-    while(i < philo_num)
+    while(i < philo->number_of_philos)
     {
-        if (pthread_create(&ph[i], NULL, &hey, NULL) != 0)
+        if (pthread_create(&ph[philo->i], NULL, hey, NULL) != 0)
             error("ERROR\n");
         usleep(1);
         i++;
@@ -36,15 +36,16 @@ void    create_threads(int philo_num)
 
 int main(int ac, char **av)
 {
-    int philo_num;
+    t_philo     *philo;
 
-    if (ac > 1)
+    philo = malloc(sizeof(t_philo) * 1);
+    if (ac == 5 || ac == 6)
     {
-        philo_num = ft_atoi(av[1]);
         check_numbers(av);
-        create_threads(philo_num);
+        atoi_initialize(av, philo);
+        create_threads(philo);
     }
     else
-        error("ERROR: arguments are not valide!\n");
+        error("ERROR: number of arguments is not valide!\n");
     return (0);
 }

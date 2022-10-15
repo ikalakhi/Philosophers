@@ -40,3 +40,15 @@ int	ft_atoi(char *str)
 	}
 	return (s * nb);
 }
+
+void	atoi_initialize(char **av, t_philo *philo)
+{
+	philo->number_of_philo = ft_atoi(av[1]);
+	printf("number_of_philo %d\n", philo->number_of_philo);
+	philo->time_to_die = ft_atoi(av[2]);
+	printf("time_to_die %d\n", philo->time_to_die);
+	philo->time_to_eat = ft_atoi(av[3]);
+	printf("time_to_eat %d\n", philo->time_to_eat);
+	philo->time_to_sleep = ft_atoi(av[4]);
+	printf("time_to_sleep %d\n", philo->time_to_sleep);
+}

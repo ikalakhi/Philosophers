@@ -19,12 +19,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 all : $(NAME)
 $(NAME): $(OBJS)
-	cc  $(OBJS) $(CFLAGS) -o $(NAME)
+	cc  $(SRC) $(CFLAGS) -o $(NAME)
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
