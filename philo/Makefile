@@ -12,10 +12,10 @@
 
 NAME = philo
 
-SRC = philo.c philo_utils.c philo_errors.c
+SRC = philo.c philo_errors.c philo_utils.c threads.c atoi.c philo_initialize.c
 
 OBJS = $(SRC:.c=.o)
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -pthread -g -fsanitize=address
 
 all : $(NAME)
 $(NAME): $(OBJS)

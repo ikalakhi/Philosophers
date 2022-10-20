@@ -5,50 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikalakhi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 09:39:12 by ikalakhi          #+#    #+#             */
-/*   Updated: 2022/10/07 09:39:14 by ikalakhi         ###   ########.fr       */
+/*   Created: 2022/10/20 16:30:17 by ikalakhi          #+#    #+#             */
+/*   Updated: 2022/10/20 16:30:43 by ikalakhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "philo.h"
 
-int	ft_atoi(char *str)
+long long   current_time(void)
 {
-	int			s;
-	int			i;
-	long int	nb;
+    struct timeval time;
+    long long       i;
 
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++ ;
-	s = 1;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			s = s * (-1);
-		i++;
-	}
-	nb = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i] - 48);
-		if (nb > 2147483647 && s > 0)
-			return (-1);
-		else if (nb > 2147483648 && s < 0)
-			return (0);
-		i++ ;
-	}
-	return (s * nb);
+    gettimeofday(&time, NULL);
+    i = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+    return(i);
 }
 
-void	atoi_initialize(char **av, t_philo *philo)
+void    sleeping(long long time_to_sleep)
 {
-	philo->number_of_philo = ft_atoi(av[1]);
-	printf("number_of_philo %d\n", philo->number_of_philo);
-	philo->time_to_die = ft_atoi(av[2]);
-	printf("time_to_die %d\n", philo->time_to_die);
-	philo->time_to_eat = ft_atoi(av[3]);
-	printf("time_to_eat %d\n", philo->time_to_eat);
-	philo->time_to_sleep = ft_atoi(av[4]);
-	printf("time_to_sleep %d\n", philo->time_to_sleep);
+    long long  time_now;
+
+    time_now = current_time();
+    while(current_time() - time_now < time_to_sleep)
+    {
+        sleep(150);
+    }
 }
