@@ -21,6 +21,8 @@ int main(int ac, char **av)
     {
         check_numbers(av);
         num_philo = ft_atoi(av[1]);
+        if (num_philo == 0)
+            error("ERROR: number of philo is not valide!\n");
         comp = malloc(sizeof(t_comp) * 1);
         philo = malloc(sizeof(t_philo) * num_philo);
         if (!comp || !philo)

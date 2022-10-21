@@ -28,6 +28,6 @@ void    sleeping(long long time_to_sleep)
     time_now = current_time();
     while(current_time() - time_now < time_to_sleep)
     {
-        sleep(150);
+        usleep(150);
     }
 }

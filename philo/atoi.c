@@ -32,29 +32,10 @@ int	ft_atoi(char *str)
 	{
 		nb = nb * 10 + (str[i] - 48);
 		if (nb > 2147483647 && s > 0)
-			return (-1);
+			error("ERROR: arguments are not valide!\n");
 		else if (nb > 2147483648 && s < 0)
-			return (0);
+			error("ERROR: arguments are not valide!\n");
 		i++;
 	}
 	return (s * nb);
-}
-
-void	atoi_initialize(char **av, t_philo *philo)
-{
-	int	num_philo;
-	int	i;
-
-	num_philo = ft_atoi(av[1]);
-	i = 0;
-	while(i < num_philo)
-	{
-		philo[i].number_of_philos = ft_atoi(av[1]);
-		philo[i].time_to_die = ft_atoi(av[2]);
-		philo[i].time_to_eat = ft_atoi(av[3]);
-		philo[i].time_to_sleep = ft_atoi(av[4]);
-		philo[i].beginning_time = current_time();
-		philo[i].philo_index = i;
-		i++;
-	}
 }

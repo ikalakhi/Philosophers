@@ -24,12 +24,32 @@ void	error(char *s)
 	exit(EXIT_FAILURE);
 }
 
+void check_emty_string(char **av)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while(av[i])
+	{
+		j = 0;
+		while(av[i][j + 1])
+		{
+			if (!av[i][j])
+                error("ERROR: arguments are not valide!\n");
+            j++;
+		}
+        i++;
+	}
+}
+
 void	check_numbers(char **av)
 {
 	int	i;
 	int	j;
 
 	i = 1;
+	check_emty_string(av);
 	while(av[i])
 	{
 		j = 0;
