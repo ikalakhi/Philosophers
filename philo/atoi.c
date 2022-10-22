@@ -6,7 +6,7 @@
 /*   By: ikalakhi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:39:12 by ikalakhi          #+#    #+#             */
-/*   Updated: 2022/10/07 09:39:14 by ikalakhi         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:08:40 by ikalakhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -32,9 +32,9 @@ int	ft_atoi(char *str)
 	{
 		nb = nb * 10 + (str[i] - 48);
 		if (nb > 2147483647 && s > 0)
-			return(-1);
+			return (-1);
 		else if (nb > 2147483648 && s < 0)
-			return(-1);
+			return (-1);
 		i++;
 	}
 	return (s * nb);

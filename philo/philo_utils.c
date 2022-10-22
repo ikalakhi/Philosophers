@@ -27,7 +27,13 @@ void    sleeping(long long time_to_sleep)
 
     time_now = current_time();
     while(current_time() - time_now < time_to_sleep)
-    {
         usleep(150);
-    }
+}
+
+void    my_free(t_philo *philo)
+{
+    free(philo->m_printf);
+    free(philo->mutex);
+    free(philo->fork);
+    free(philo);
 }

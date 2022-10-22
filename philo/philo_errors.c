@@ -6,7 +6,7 @@
 /*   By: ikalakhi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:39:02 by ikalakhi          #+#    #+#             */
-/*   Updated: 2022/10/07 09:39:04 by ikalakhi         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:21:52 by ikalakhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -30,19 +30,19 @@ int	check_emty_string(char **av)
 	int	j;
 
 	i = 0;
-	while(av[i])
+	while (av[i])
 	{
 		j = 0;
-		while(av[i][j + 1])
+		while (av[i][j + 1])
 		{
 			if (!av[i][j])
 			{
-                error("ERROR: arguments are not valide!\n");
+				error ("ERROR: arguments are not valide!\n");
 				return (-1);
 			}
-            j++;
+			j++ ;
 		}
-        i++;
+		i++ ;
 	}
 	return (0);
 }
@@ -53,21 +53,21 @@ int	check_numbers(char **av)
 	int	j;
 
 	i = 1;
-	while(av[i])
+	while (av[i])
 	{
 		j = 0;
-		while(av[i][j])
+		while (av[i][j])
 		{
-			if(av[i][0] == '+')
+			if (av[i][0] == '+')
 				j++;
 			if (av[i][j] < '0' || av[i][j] > '9')
-            {
-                error("ERROR: arguments are not valide!\n");
+			{
+				error("ERROR: arguments are not valide!\n");
 				return (-1);
 			}
-            j++;
+			j++;
 		}
-        i++;
+		i++;
 	}
-	return(0);
+	return (0);
 }
