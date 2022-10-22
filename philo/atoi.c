@@ -32,9 +32,9 @@ int	ft_atoi(char *str)
 	{
 		nb = nb * 10 + (str[i] - 48);
 		if (nb > 2147483647 && s > 0)
-			error("ERROR: arguments are not valide!\n");
+			return(-1);
 		else if (nb > 2147483648 && s < 0)
-			error("ERROR: arguments are not valide!\n");
+			return(-1);
 		i++;
 	}
 	return (s * nb);

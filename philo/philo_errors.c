@@ -21,10 +21,10 @@ void	error(char *s)
 		write (1, &s[i], 1);
 		i++;
 	}
-	exit(EXIT_FAILURE);
+	return ;
 }
 
-void check_emty_string(char **av)
+int	check_emty_string(char **av)
 {
 	int	i;
 	int	j;
@@ -36,29 +36,38 @@ void check_emty_string(char **av)
 		while(av[i][j + 1])
 		{
 			if (!av[i][j])
+			{
                 error("ERROR: arguments are not valide!\n");
+				return (-1);
+			}
             j++;
 		}
         i++;
 	}
+	return (0);
 }
 
-void	check_numbers(char **av)
+int	check_numbers(char **av)
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	check_emty_string(av);
 	while(av[i])
 	{
 		j = 0;
 		while(av[i][j])
 		{
+			if(av[i][0] == '+')
+				j++;
 			if (av[i][j] < '0' || av[i][j] > '9')
+            {
                 error("ERROR: arguments are not valide!\n");
+				return (-1);
+			}
             j++;
 		}
         i++;
 	}
+	return(0);
 }
