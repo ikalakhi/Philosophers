@@ -50,9 +50,9 @@ typedef struct t_philosophers
 void		error(char *s);
 void		death(t_philo *philo, int ac);
 void		sleeping(long long time_to_sleep);
-void		my_print(char *ph, char *state, t_philo *philo);
-void		atoi_initialize(char **av, t_philo *philo, int ac);
+void		my_print(char *state, t_philo *philo);
 void		forkes_initialize(t_philo *philo, int num_philo);
+void		atoi_initialize(char **av, t_philo *philo, int ac);
 void		create_threads(t_philo *philo, int number_of_philos, int ac);
 
 int			check_numbers(char **av);

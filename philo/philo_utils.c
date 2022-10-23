@@ -11,6 +11,14 @@
 /* ************************************************************************** */
 #include "philo.h"
 
+void    my_print(char *state, t_philo *philo)
+{
+    pthread_mutex_lock(philo->m_printf);
+    printf(" %llu  %d %s\n",(current_time() - philo->beginning_time)\
+        ,philo->philo_index + 1, state);
+    pthread_mutex_unlock(philo->m_printf);
+}
+
 long long   current_time(void)
 {
     struct timeval time;

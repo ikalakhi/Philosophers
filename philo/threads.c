@@ -11,14 +11,6 @@
 /* ************************************************************************** */
 #include "philo.h"
 
-void    my_print(char *ph, char *state, t_philo *philo)
-{
-    pthread_mutex_lock(philo->m_printf);
-    printf(" %llu %s %d %s\n",(current_time() - philo->beginning_time), ph\
-        ,philo->philo_index + 1, state);
-    pthread_mutex_unlock(philo->m_printf);
-}
-
 int death_op_argument(t_philo *philo)
 {
     int cont;
@@ -50,7 +42,7 @@ void    death(t_philo *philo, int ac)
             if(time >= philo[i].time_to_die && philo[i].eated == 0)
             {
                 pthread_mutex_lock(philo[i].m_printf);
-                printf(" %llu Philosopher %d dead\n",
+                printf(" %llu  %d dead\n",
                     (current_time() - philo[i].beginning_time),
                     philo[i].philo_index + 1);
                 return ;
@@ -59,10 +51,27 @@ void    death(t_philo *philo, int ac)
         }
         pthread_mutex_unlock(philo->mutex);
         if(ac == 6)
+        {
+            pthread_mutex_lock(philo[i].time);
             if (death_op_argument(philo) == 1)
                 return ;
+            pthread_mutex_unlock(philo[i].time);
+        }
         i = (i + 1) % philo ->number_of_philos;
     }
+}
+
+void    help_rutin(t_philo *philo)
+{
+    sleeping(philo->time_to_eat);
+    pthread_mutex_unlock(&philo->fork[philo->philo_index]);
+    pthread_mutex_unlock(&philo->fork[(philo->philo_index + 1) % philo->number_of_philos]);
+    pthread_mutex_lock(philo->mutex);
+    philo->eated = 0;
+    pthread_mutex_unlock(philo->mutex);
+    my_print("is sleeping", philo);
+    sleeping(philo->time_to_sleep);
+    my_print("is thinking", philo);
 }
 
 void    *philorutin_1(void *philos)
@@ -73,10 +82,10 @@ void    *philorutin_1(void *philos)
     while(1)
     {
         pthread_mutex_lock(&philo->fork[philo->philo_index]);
-        my_print("Philosopher", "has taken a fork", philo);
+        my_print("has taken a fork", philo);
         pthread_mutex_lock(&philo->fork[(philo->philo_index + 1) % philo->number_of_philos]);
-        my_print("Philosopher", "has taken a fork", philo);
-        my_print("Philosopher", "is eating", philo);
+        my_print("has taken a fork", philo);
+        my_print("is eating", philo);
         pthread_mutex_lock(philo->mutex);
         philo->last_eat = current_time() - philo->time_of_start;
         pthread_mutex_unlock(philo->mutex);
@@ -84,15 +93,7 @@ void    *philorutin_1(void *philos)
         pthread_mutex_lock(philo->mutex);
         philo->eated = 1;
         pthread_mutex_unlock(philo->mutex);
-        sleeping(philo->time_to_eat);
-        pthread_mutex_unlock(&philo->fork[philo->philo_index]);
-        pthread_mutex_unlock(&philo->fork[(philo->philo_index + 1) % philo->number_of_philos]);
-        pthread_mutex_lock(philo->mutex);
-        philo->eated = 0;
-        pthread_mutex_unlock(philo->mutex);
-        my_print("Philosopher", "is sleeping", philo);
-        sleeping(philo->time_to_sleep);
-        my_print("Philosopher", "is thinking", philo);
+        help_rutin(philo);
     }
 }
 
@@ -109,16 +110,9 @@ void    create_threads(t_philo *philo, int number_of_philos, int ac)
     {
         if (pthread_create(&ph[i], NULL, philorutin_1, &philo[i]) != 0)
             error("ERROR\n");
-        i += 2;
-    }
-    usleep(250);
-    i = 1;
-    while(i < number_of_philos)
-    {
-        if (pthread_create(&ph[i], NULL, philorutin_1, &philo[i]) != 0)
-            error("ERROR\n");
-        i += 2;
+        usleep(150);
+        i++;
     }
     death(philo, ac);
-    free(philo);
+    // free(philo);
 }
