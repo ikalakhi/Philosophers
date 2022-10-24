@@ -15,7 +15,7 @@ NAME = philo
 SRC = philo.c philo_errors.c philo_utils.c threads.c atoi.c philo_initialize.c
 
 OBJS = $(SRC:.c=.o)
-CFLAGS = -Wall -Wextra -Werror -pthread #-g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread -g -fsanitize=thread
 
 all : $(NAME)
 $(NAME): $(OBJS)
