@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 		if (check_numbers(av) == -1 || check_emty_string(av) == -1)
 			return (0);
 		num_philo = ft_atoi(av[1]);
-		if (ft_atoi(av[1]) <= 0)
+		if (num_philo <= 0)
 		{
 			error("ERROR:  arguments is not valide!\n");
 			return (0);
@@ -37,6 +37,5 @@ int	main(int ac, char **av)
 	}
 	else
 		error("ERROR: number of arguments is not valide!\n");
-	// while(1);
 	return (0);
 }
