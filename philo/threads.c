@@ -34,6 +34,13 @@ void    death(t_philo *philo, int ac)
     while(i < philo->number_of_philos)
     {
         pthread_mutex_lock(philo->mutex);
+        if (philo->number_of_philos == 1)
+        {   pthread_mutex_lock(philo[i].m_printf);
+            printf(" %llu  %d dead\n",
+                (current_time() - philo[i].beginning_time),
+                philo[i].philo_index + 1);
+                return ;
+        }
         if (philo[i].eated == 0)
         {
             pthread_mutex_lock(philo[i].time);
@@ -114,5 +121,5 @@ void    create_threads(t_philo *philo, int number_of_philos, int ac)
         i++;
     }
     death(philo, ac);
-    // free(philo);
+    free(ph);
 }

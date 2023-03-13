@@ -37,5 +37,6 @@ int	main(int ac, char **av)
 	}
 	else
 		error("ERROR: number of arguments is not valide!\n");
+	// while(1);
 	return (0);
 }
